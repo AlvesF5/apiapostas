@@ -38,21 +38,7 @@ public class ApostadorController {
 		apostador.setApostas(List.of(aposta));
 		
 		aposta.setApostador(apostador);
-			
-		
-	    if(apostadorRepository.findAll().contains(apostador)) {
-	    	String emailApostador = apostador.getEmail();
-	    	if(apostadorRepository.findByEmail(emailApostador).getApostas().contains(aposta)) {
-	    		Aposta novaAposta = new Aposta();
-	    		novaAposta.setApostador(apostador);
-	    	   apostadorRepository.findByEmail(emailApostador).setApostas(List.of(novaAposta));
-	    		
-	    	}else {
-	    		apostadorRepository.findByEmail(emailApostador).setApostas(List.of(aposta));
-	    		
-	    	}
-	    }
-			
+				
 		return apostadorRepository.save(apostador);
 	    
 	}
