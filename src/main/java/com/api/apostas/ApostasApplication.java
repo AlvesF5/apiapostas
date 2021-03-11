@@ -1,13 +1,13 @@
-package com.apostas.api.apostas.api;
+package com.api.apostas;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class ApiDeApostasApplication {
+public class ApostasApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(ApiDeApostasApplication.class, args);
+		SpringApplication.run(ApostasApplication.class, args);
 	}
 
 }

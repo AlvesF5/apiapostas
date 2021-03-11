@@ -1,10 +1,10 @@
-package com.apostas.api.apostas.api;
+package com.api.apostas;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class ApiDeApostasApplicationTests {
+class ApostasApplicationTests {
 
 	@Test
 	void contextLoads() {
