@@ -1,5 +1,6 @@
 package com.api.apostas.models;
 
+import java.time.LocalDateTime;
 import java.util.Random;
 
 import javax.persistence.Column;
@@ -10,49 +11,38 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Setter
+@Getter
 @Entity
 @Table(name="tb_aposta")
 public class Aposta {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	private long id;
+	private Long id;
 	
 	@Column
-	private int aposta = gerarAposta().nextInt();
+	private int numeroAposta = gerarAposta();
 	@ManyToOne
 	private Apostador apostador;
 	
-	
-	
-   public void setId(long id) {
-		this.id = id;
-	}
-
-
-    public int getAposta() {
-		return aposta;
-	}
-
-
-	public long getId() {
-		return id;
-	}
+	@Column
+	private LocalDateTime criadaEm = LocalDateTime.now();
 	
 
-	public Apostador getApostador() {
-		return apostador;
-	}
-
-
-
-	public void setApostador(Apostador apostador) {
-		this.apostador = apostador;
-	}
-
-
-	public Random gerarAposta() {
+	public int gerarAposta() {
+	   int numeros=0;
+	   
 	   Random numerosAposta = new Random();	   
-	   return numerosAposta;
+	   
+	   for(int i = 0; i < 6; i++) {
+		 numeros+=numerosAposta.nextInt(10000000);
+	   }
+	   return numeros;
    }
+
+	
 
 }

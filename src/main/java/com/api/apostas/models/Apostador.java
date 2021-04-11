@@ -12,66 +12,43 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
-import com.api.apostas.repository.ApostadorRepository;
-
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+@Setter
+@Getter
+@NoArgsConstructor
 @Entity
 @Table(name="tb_apostador")
 public class Apostador {
-	
-	
-	
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
-	private long id;
-	@Column(name ="email", nullable = false)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	private Long id;
+	
+	@Column(nullable=false)
 	private String email;
-	
-	
-	@Column(name="apostas")
 	@OneToMany(mappedBy = "apostador", fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE})
 	private List<Aposta> apostas;
 	
 	
-	public long getId() {
-		return id;
+	public Apostador(String email, List<Aposta> apostas) {
+		this.email=email;
+		this.apostas=apostas;
 	}
-	public void setId(long id) {
-		this.id = id;
-	}
-	public String getEmail() {
-		return email;
-	}
-	public void setEmail(String email) {
-		this.email = email;
-	}
-	public List<Aposta> getApostas() {
-		return apostas;
-	}
-	public void setApostas(List<Aposta> apostas) {
-		this.apostas = apostas;
-	}
-	
-	
 
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Apostador other = (Apostador) obj;
-		if (email == null) {
-			if (other.email != null)
-				return false;
-		} else if (!email.equals(other.email))
-			return false;
-		return true;
-	}
 	
+	
+	public boolean equals(Aposta aposta) {
+	   boolean existe;
+	   if(this.apostas.iterator().next().getNumeroAposta()==aposta.getNumeroAposta()) {
+		   existe = true;
+	   }else {
+		   existe = false;
+	   }
+		   
+	   return existe; 
+	   
+	}
 
 	
 	
